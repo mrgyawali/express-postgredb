@@ -11,13 +11,12 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.get('/', (req, res) => {
-    // db.select().from('todo').where('id',12).then(data => res.send(data))
     knex.select('*').from('todo').then(data => res.send(data))
 })
 
-// app.post('/', (req, res) => {
-//     db.insert(req.body).returning('*').into('todo').then(data => res.send(data));
-// })
+app.post('/', (req, res) => {
+    knex.insert(req.body).returning('*').into('todo').then(data => res.send(data));
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
